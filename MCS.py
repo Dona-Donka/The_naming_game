@@ -42,10 +42,11 @@ def MCS(board2D, steps):
             for x in range(100):
                 speaker = board2D[y][x]
                 hearer = getHearer(x, y)
-                talk.checkWord(speaker, hearer, successes)
+                successes = talk.checkWord(speaker, hearer, successes)
                 print(successes)
-        print(getData.updateTotalSuccesses(step, successes))
+        print(getData.totalSuccesses(step, successes))
         print(getData.totalWords(board2D))
+        print("new: ",getData.totalNewWords())
 
 
 MCS(board2D,40)

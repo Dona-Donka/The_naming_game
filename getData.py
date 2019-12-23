@@ -1,7 +1,12 @@
 
 totalSuccesses = 0
 
-def updateTotalSuccesses(step, successes):
+def updateTotalSuccesses(successes):
+    successes = successes + 1
+    print("success", successes)
+    return  successes
+
+def totalSuccesses(step,successes):
     with open('successes.txt', "a+") as successesFile:
             successesFile.write(str(step) + " ")
             successesFile.write(str(successes) + "\n")
@@ -9,7 +14,7 @@ def updateTotalSuccesses(step, successes):
 
 def totalNewWords():
     totalNewWords = 0
-    with open('words.txt', "a+") as wordsFile:
+    with open('words.txt', "r") as wordsFile:
         wordsFile.readline()
         for line in wordsFile:
             totalNewWords = totalNewWords + 1
