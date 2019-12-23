@@ -37,16 +37,22 @@ def getHearer(x, y):
 
 def MCS(board2D, steps):
     for step in range(steps):
+        print("-------", step)
         successes = 0
         for y in range(10):
             for x in range(100):
                 speaker = board2D[y][x]
                 hearer = getHearer(x, y)
                 successes = talk.checkWord(speaker, hearer, successes)
-                print(successes)
-        print(getData.totalSuccesses(step, successes))
-        print(getData.totalWords(board2D))
-        print("new: ",getData.totalNewWords())
+        print("successes: ", getData.totalSuccesses(step, successes))
+        print("total words: ", getData.totalWords(board2D))
+        print("new words: ", getData.totalNewWords())
 
 
-MCS(board2D,40)
+def runProject(board, mcs):
+    print("processing...")
+    open("successes.txt", "w").close()
+    open("words.txt", "w").close()
+    MCS(board, mcs)
+
+runProject(board2D, 5000)

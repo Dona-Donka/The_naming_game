@@ -3,7 +3,6 @@ totalSuccesses = 0
 
 def updateTotalSuccesses(successes):
     successes = successes + 1
-    print("success", successes)
     return  successes
 
 def totalSuccesses(step,successes):
