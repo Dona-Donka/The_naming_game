@@ -1,52 +1,64 @@
 import random
 import board
 import talk
-import getData
+import createWord, getData
 
 N_2D = 1000
 board2D = board.get2DBoard(N_2D)
 
-def getHearer(x, y):
+def getHearer(y, x):
     randomNumber = random.randint(0, 3)
 
     if randomNumber == 0:
         if x != 0:
-            hearer = board2D[y][x-1]
+            return y, x-1
         else:
-            hearer = board2D[y][99]
+            return y, 99
 
     if randomNumber == 1:
         if x != 99:
-            hearer = board2D[y][x+1]
+            return y, x+1
         else:
-            hearer = board2D[y][0]
+            return y, 0
 
     if randomNumber == 2:
         if y != 0:
-            hearer = board2D[y-1][x]
+            return y-1, x
         else:
-            hearer = board2D[9][x]
+            return 9, x
 
     if randomNumber == 3:
         if y != 9:
-            hearer = board2D[y-1][x]
+            return y-1, x
         else:
-            hearer = board2D[0][x]
-    return hearer
+            return 0, x
+
 
 
 def MCS(board2D, steps):
     for step in range(steps):
-        print("-------", step)
+        print(step)
         successes = 0
         for y in range(10):
             for x in range(100):
                 speaker = board2D[y][x]
-                hearer = getHearer(x, y)
-                successes = talk.checkWord(speaker, hearer, successes)
+                neighbour = getHearer(y, x)
+                hearer = board2D[neighbour[0]][neighbour[1]]
+                if len(speaker) != 0:
+                    word = random.choice(speaker)
+                    if word in hearer:
+                        successes = successes + 1
+                        board2D[y][x] = [word]
+                        board2D[neighbour[0]][neighbour[1]] = [word]
+                    else:
+                        hearer.append(word)
+                else:
+                    speaker.append(createWord.getNewWord())
+
         print("successes: ", getData.totalSuccesses(step, successes))
         print("total words: ", getData.totalWords(board2D))
         print("new words: ", getData.totalNewWords())
+    return board2D
 
 
 def runProject(board, mcs):
@@ -55,4 +67,4 @@ def runProject(board, mcs):
     open("words.txt", "w").close()
     MCS(board, mcs)
 
-runProject(board2D, 5000)
+runProject(board2D, 30000)
