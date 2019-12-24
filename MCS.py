@@ -1,6 +1,5 @@
 import random
 import board
-import talk
 import createWord, getData
 
 N_2D = 1000
@@ -56,7 +55,7 @@ def MCS(board2D, steps):
                     speaker.append(createWord.getNewWord())
 
         print("successes: ", getData.totalSuccesses(step, successes))
-        print("total words: ", getData.totalWords(board2D))
+        print("total words: ", getData.totalWords(board2D, step))
         print("new words: ", getData.totalNewWords())
     return board2D
 

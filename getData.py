@@ -1,10 +1,4 @@
 
-totalSuccesses = 0
-
-def updateTotalSuccesses(successes):
-    successes = successes + 1
-    return  successes
-
 def totalSuccesses(step,successes):
     with open('successes.txt', "a+") as successesFile:
             successesFile.write(str(step) + " ")
@@ -19,9 +13,12 @@ def totalNewWords():
             totalNewWords = totalNewWords + 1
     return totalNewWords
 
-def totalWords(board2D):
+def totalWords(board2D, step):
     totalWords = 0
     for y in board2D:
         for x in y:
             totalWords = totalWords + len(x)
+    with open('totalWords.txt', "a+") as totalWordsFile:
+            totalWordsFile.write(str(step) + " ")
+            totalWordsFile.write(str(totalWords) + "\n")
     return totalWords
