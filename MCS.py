@@ -54,16 +54,17 @@ def MCS(board2D, steps):
                 else:
                     speaker.append(createWord.getNewWord())
 
+        getData.updateWordList(getData.getDifferentWords(board2D))
         print("successes: ", getData.totalSuccesses(step, successes))
         print("total words: ", getData.totalWords(board2D, step))
-        print("new words: ", getData.totalNewWords())
+        print("new words: ", getData.totalDifferentWords(step))
     return board2D
 
 
 def runProject(board, mcs):
     print("processing...")
+    open("totalDifferentWords.txt", "w").close()
     open("successes.txt", "w").close()
-    open("words.txt", "w").close()
     MCS(board, mcs)
 
-runProject(board2D, 30000)
+runProject(board2D, 100)

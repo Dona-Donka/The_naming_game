@@ -5,13 +5,35 @@ def totalSuccesses(step,successes):
             successesFile.write(str(successes) + "\n")
     return successes
 
-def totalNewWords():
-    totalNewWords = 0
+def totalDifferentWords(step):
+    totalDifferentWords = 0
     with open('words.txt', "r") as wordsFile:
         wordsFile.readline()
         for line in wordsFile:
-            totalNewWords = totalNewWords + 1
-    return totalNewWords
+            totalDifferentWords = totalDifferentWords + 1
+
+    with open("totalDifferentWords.txt", "w") as tdf:
+        tdf.write(str(step) + " ")
+        tdf.write(str(totalDifferentWords) + "\n")
+    return totalDifferentWords
+
+def getDifferentWords(board2D):
+    differentWords = []
+    for y in board2D:
+        for x in y:
+            for word in x:
+                if word in x:
+                    if word not in differentWords:
+                        differentWords.append(word)
+    return differentWords
+
+def updateWordList(words):
+    open("words.txt", "w").close()
+    with open('words.txt', "a+") as wordsFile:
+        for word in words:
+                wordsFile.write(word + "\n")
+    return 0
+
 
 def totalWords(board2D, step):
     totalWords = 0
