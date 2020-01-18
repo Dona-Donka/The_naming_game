@@ -7,6 +7,6 @@ def get2DBoard(N):
     return(board2D)
 
 def get1DBoard(N):
-    return [[N] for x in range(N)]
+    return [[] for x in range(N)]
 
 
