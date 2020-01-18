@@ -5,7 +5,7 @@ import createWord, getData
 N_2D = 1000
 board2D = board.get2DBoard(N_2D)
 
-def getHearer(y, x):
+def getHearer2D(y, x):
     randomNumber = random.randint(0, 3)
 
     if randomNumber == 0:
@@ -32,16 +32,25 @@ def getHearer(y, x):
         else:
             return 0, x
 
+def getHearerMF(x,y):
+    randomNumberX = random.randint(0, 99)
+    randomNumberY = random.randint(0, 9)
+    if x == randomNumberX and y == randomNumberY:
+        return getHearerMF(x,y)
+    else:
+        return (randomNumberY,randomNumberX)
 
 
-def MCS(board2D, steps):
+
+def MCS_2D(board2D, steps):
     for step in range(steps):
         print(step)
         successes = 0
         for y in range(10):
             for x in range(100):
                 speaker = board2D[y][x]
-                neighbour = getHearer(y, x)
+                neighbour = getHearer2D(y, x)
+                #neighbour = getHearerMF(y, x)
                 hearer = board2D[neighbour[0]][neighbour[1]]
                 if len(speaker) != 0:
                     word = random.choice(speaker)
@@ -65,6 +74,6 @@ def runProject(board, mcs):
     print("processing...")
     open("totalDifferentWords.txt", "w").close()
     open("successes.txt", "w").close()
-    MCS(board, mcs)
+    MCS_2D(board, mcs)
 
 runProject(board2D, 100)
